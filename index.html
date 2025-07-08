@@ -1,42 +1,41 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Photo Website</title>
-    <link rel="stylesheet" href="styles.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Pexels Image Gallery</title>
+  <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
-    <header>
-        <div class="logo">pexels</div>
-        <div class="search-bar">
-            <select>
-                <option>Photos</option>
-            </select>
-            <input type="text" id="searchInput" placeholder="Search for free photos" />
-            <button id="searchBtn">Search</button>
+  <header>
+    <div class="logo">pexels</div>
+    <div class="search-bar">
+      <select>
+        <option>Photos</option>
+      </select>
+      <input type="text" id="searchInput" placeholder="Search for free photos" />
+      <button id="searchBtn">Search</button>
+    </div>
+    <nav>
+      <ul>
+        <li>Home</li>
+        <li>Videos</li>
+        <li>Leaderboard</li>
+        <li>Challenges</li>
+      </ul>
+    </nav>
+    <div class="join-button">
+      <button>Join</button>
+    </div>
+  </header>
 
-        </div>
-        <nav>
-            <ul>
-                <li>Home</li>
-                <li>Videos</li>
-                <li>Leaderboard</li>
-                <li>Challenges</li>
-            </ul>
-        </nav>
-        <div class="join-button">
-            <button>Join</button>
-        </div>
-    </header>
+  <main>
+    <section class="free-stock-photos">
+      <h2>Free Stock Photos</h2>
+      <div id="imageGallery" class="photos"></div>
+    </section>
+  </main>
 
-    <main>
-        <section class="free-stock-photos">
-            <h2>Free Stock Photos</h2>
-            <div class="photos">
-                <img src="https://images.pexels.com/photos/123/pexels-photo-123.jpeg" alt="Beautiful scenery">
-            </div>
-        </section>
-    </main>
+  <script src="script.js"></script>
 </body>
 </html>
