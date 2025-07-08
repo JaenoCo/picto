@@ -1,3 +1,46 @@
+const VIDEO_URL = 'https://api.pexels.com/videos/popular';
+
+// Fetch and display popular videos (like Pinterest)
+function fetchVideos() {
+  const videoGallery = document.getElementById('videoGallery');
+  videoGallery.innerHTML = '';
+  return fetch(`${VIDEO_URL}?per_page=9`, {
+    headers: {
+      Authorization: API_KEY
+    }
+  })
+    .then(res => {
+      if (!res.ok) {
+        throw new Error(`HTTP error! status: ${res.status}`);
+      }
+      return res.json();
+    })
+    .then(data => {
+      if (!data.videos || data.videos.length === 0) {
+        videoGallery.innerHTML = '<p>No videos found.</p>';
+        return;
+      }
+      data.videos.forEach(video => {
+        const videoEl = document.createElement('video');
+        videoEl.src = video.video_files[0].link;
+        videoEl.controls = true;
+        videoEl.muted = true;
+        videoEl.loop = true;
+        videoEl.autoplay = true;
+        videoEl.style.width = '100%';
+        videoEl.style.borderRadius = '12px';
+        videoEl.style.marginBottom = '10px';
+        videoGallery.appendChild(videoEl);
+      });
+      videoGallery.style.display = 'grid';
+      videoGallery.style.gridTemplateColumns = 'repeat(3, 1fr)';
+      videoGallery.style.gap = '12px';
+    })
+    .catch(error => {
+      videoGallery.innerHTML = '<p>Oops! Something went wrong loading videos.</p>';
+      console.error('Error fetching videos:', error);
+    });
+}
 // script.js
 
 const searchInput = document.getElementById('searchInput');
