@@ -10,11 +10,15 @@ const BASE_URL = 'https://api.pexels.com/v1/search';
 const CURATED_URL = 'https://api.pexels.com/v1/curated';
 // Show random popular photos on page load
 window.addEventListener('DOMContentLoaded', () => {
-  fetchPopularImages();
+  showLoading();
+  fetchPopularImages().finally(hideLoading);
 });
 
 function fetchPopularImages() {
-  fetch(`${CURATED_URL}?per_page=12`, {
+  // Pexels curated endpoint supports pagination, so pick a random page for variety
+  const maxPages = 50; // Pexels allows up to 1000 curated photos, 12 per page
+  const randomPage = Math.floor(Math.random() * maxPages) + 1;
+  return fetch(`${CURATED_URL}?per_page=12&page=${randomPage}`, {
     headers: {
       Authorization: API_KEY
     }
@@ -37,6 +41,7 @@ function fetchPopularImages() {
 searchBtn.addEventListener('click', () => {
   const query = searchInput.value.trim();
   if (query !== '') {
+    showLoading();
     fetchImages(query);
   }
 });
@@ -60,7 +65,17 @@ function fetchImages(query) {
     .catch(error => {
       console.error('Error fetching data from Pexels API:', error); //error handling
       gallery.innerHTML = `<p>Oops! Something went wrong. Please try again later.</p>`;
+    })
+    .finally(() => {
+      hideLoading();
     });
+}
+// Show/hide loading screen helpers
+function showLoading() {
+  document.getElementById('loadingScreen').style.display = 'flex';
+}
+function hideLoading() {
+  document.getElementById('loadingScreen').style.display = 'none';
 }
 
 function displayImages(photos) {
