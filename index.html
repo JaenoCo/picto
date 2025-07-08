@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Pexels Image Gallery</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header>
+    <div class="logo">Picto</div>
+    <div class="search-bar">
+      <select>
+        <option>Photos</option>
+      </select>
+      <input type="text" id="searchInput" placeholder="Search for free photos" />
+      <button id="searchBtn">Search</button>
+    </div>
+    <nav>
+      <ul>
+        <li>Home</li>
+        <li>Videos</li>
+        <li>Profile</li>
+      </ul>
+    </nav>
+    <div class="join-button">
+      <button>Join</button>
+    </div>
+  </header>
+
+  <main>
+    <section class="free-stock-photos">
+      <h2>Free Stock Photos</h2>
+      <div id="imageGallery" class="photos"></div>
+    </section>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
