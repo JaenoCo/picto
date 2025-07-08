@@ -42,12 +42,32 @@
     <div style="margin-left:30px;font-size:1.2em;color:#333;">Loading... Please wait!</div>
   </div>
 
+
   <main>
-    <section class="free-stock-photos">
+    <section class="free-stock-photos" id="photosSection">
       <div id="imageGallery" class="photos"></div>
+    </section>
+    <section class="video-section" id="videoSection" style="display:none;">
+      <div id="videoGallery" class="videos"></div>
     </section>
   </main>
 
   <script src="script.js"></script>
+  <script>
+    // Navigation for Videos tab
+    document.querySelectorAll('nav ul li').forEach(li => {
+      li.addEventListener('click', function() {
+        if (this.textContent.trim() === 'Videos') {
+          document.getElementById('photosSection').style.display = 'none';
+          document.getElementById('videoSection').style.display = '';
+          showLoading();
+          fetchVideos().finally(hideLoading);
+        } else {
+          document.getElementById('photosSection').style.display = '';
+          document.getElementById('videoSection').style.display = 'none';
+        }
+      });
+    });
+  </script>
 </body>
 </html>
