@@ -52,15 +52,20 @@
 
   <script src="script.js"></script>
   <script>
-    // Navigation for Videos tab
+    // Navigation for Videos and Home tab
     document.querySelectorAll('nav ul li').forEach(li => {
       li.addEventListener('click', function() {
-        if (this.textContent.trim() === 'Videos') {
+        const text = this.textContent.trim();
+        if (text === 'Videos') {
           document.getElementById('photosSection').style.display = 'none';
           document.getElementById('videoSection').style.display = '';
           showLoading();
-          // Always fetch new videos on every click
           fetchVideos().finally(hideLoading);
+        } else if (text === 'Home') {
+          document.getElementById('photosSection').style.display = '';
+          document.getElementById('videoSection').style.display = 'none';
+          showLoading();
+          fetchPopularImages().finally(hideLoading);
         } else {
           document.getElementById('photosSection').style.display = '';
           document.getElementById('videoSection').style.display = 'none';
