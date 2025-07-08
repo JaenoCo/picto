@@ -4,8 +4,35 @@ const searchInput = document.getElementById('searchInput');
 const searchBtn = document.getElementById('searchBtn');
 const gallery = document.getElementById('imageGallery');
 
+
 const API_KEY = 'zd0KWpTeAu53is28npOGZtlmbQ8bnEgmfoJ0dZgfxbC9c7BCmZhGLlui'; // Replace this with your actual API key
 const BASE_URL = 'https://api.pexels.com/v1/search';
+const CURATED_URL = 'https://api.pexels.com/v1/curated';
+// Show random popular photos on page load
+window.addEventListener('DOMContentLoaded', () => {
+  fetchPopularImages();
+});
+
+function fetchPopularImages() {
+  fetch(`${CURATED_URL}?per_page=12`, {
+    headers: {
+      Authorization: API_KEY
+    }
+  })
+    .then(res => {
+      if (!res.ok) {
+        throw new Error(`HTTP error! status: ${res.status}`);
+      }
+      return res.json();
+    })
+    .then(data => {
+      displayImages(data.photos);
+    })
+    .catch(error => {
+      console.error('Error fetching curated images:', error);
+      gallery.innerHTML = `<p>Oops! Something went wrong loading popular images.</p>`;
+    });
+}
 
 searchBtn.addEventListener('click', () => {
   const query = searchInput.value.trim();
