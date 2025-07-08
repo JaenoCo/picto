@@ -14,7 +14,10 @@ window.addEventListener('DOMContentLoaded', () => {
 });
 
 function fetchPopularImages() {
-  fetch(`${CURATED_URL}?per_page=12`, {
+  // Pexels curated endpoint supports pagination, so pick a random page for variety
+  const maxPages = 50; // Pexels allows up to 1000 curated photos, 12 per page
+  const randomPage = Math.floor(Math.random() * maxPages) + 1;
+  fetch(`${CURATED_URL}?per_page=12&page=${randomPage}`, {
     headers: {
       Authorization: API_KEY
     }
