@@ -4,7 +4,10 @@ const VIDEO_URL = 'https://api.pexels.com/videos/popular';
 function fetchVideos() {
   const videoGallery = document.getElementById('videoGallery');
   videoGallery.innerHTML = '';
-  return fetch(`${VIDEO_URL}?per_page=9`, {
+  // Randomize page for new results each time
+  const maxPages = 50; // Pexels allows up to 1000 videos, 20 per page
+  const randomPage = Math.floor(Math.random() * maxPages) + 1;
+  return fetch(`${VIDEO_URL}?per_page=9&page=${randomPage}`, {
     headers: {
       Authorization: API_KEY
     }

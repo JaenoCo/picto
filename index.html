@@ -59,6 +59,7 @@
           document.getElementById('photosSection').style.display = 'none';
           document.getElementById('videoSection').style.display = '';
           showLoading();
+          // Always fetch new videos on every click
           fetchVideos().finally(hideLoading);
         } else {
           document.getElementById('photosSection').style.display = '';
