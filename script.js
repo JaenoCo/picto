@@ -4,7 +4,7 @@ const searchInput = document.getElementById('searchInput');
 const searchBtn = document.getElementById('searchBtn');
 const gallery = document.getElementById('imageGallery');
 
-const API_KEY = 'YOUR_PEXELS_API_KEY'; // Replace this with your actual API key
+const API_KEY = 'zd0KWpTeAu53is28npOGZtlmbQ8bnEgmfoJ0dZgfxbC9c7BCmZhGLlui'; // Replace this with your actual API key
 const BASE_URL = 'https://api.pexels.com/v1/search';
 
 searchBtn.addEventListener('click', () => {
