@@ -4,7 +4,7 @@ const searchInput = document.getElementById('searchInput');
 const searchBtn = document.getElementById('searchBtn');
 const gallery = document.getElementById('imageGallery');
 
-const API_KEY = 'zd0KWpTeAu53is28npOGZtlmbQ8bnEgmfoJ0dZgfxbC9c7BCmZhGLlui'; // Replace this with your actual API key
+const API_KEY = 'zd0KWpTeAu53is28npOGZtlmbQ8bnEgmfoJ0dZgfxbC9c7BCmZhGLlui'; 
 const BASE_URL = 'https://api.pexels.com/v1/search';
 
 searchBtn.addEventListener('click', () => {
@@ -14,6 +14,7 @@ searchBtn.addEventListener('click', () => {
   }
 });
 
+//get images from pexels
 function fetchImages(query) {
   fetch(`${BASE_URL}?query=${encodeURIComponent(query)}&per_page=12`, {
     headers: {
@@ -22,7 +23,7 @@ function fetchImages(query) {
   })
     .then(res => {
       if (!res.ok) {
-        throw new Error(`HTTP error! status: ${res.status}`);
+        throw new Error(`HTTP error! status: ${res.status}`); //error handling
       }
       return res.json();
     })
@@ -30,7 +31,7 @@ function fetchImages(query) {
       displayImages(data.photos);
     })
     .catch(error => {
-      console.error('Error fetching data from Pexels API:', error);
+      console.error('Error fetching data from Pexels API:', error); //error handling
       gallery.innerHTML = `<p>Oops! Something went wrong. Please try again later.</p>`;
     });
 }
