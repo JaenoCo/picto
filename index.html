@@ -20,9 +20,7 @@
         <li>Contact</li>
       </ul>
     </nav>
-    
   </header>
-
 
   <div id="loadingScreen" style="display:none;position:fixed;top:0;left:0;width:100vw;height:100vh;background:rgba(255,255,255,0.8);z-index:9999;display:flex;align-items:center;justify-content:center;">
     <div class="chibi-loader">
@@ -40,37 +38,75 @@
     <div style="margin-left:30px;font-size:1.2em;color:#333;">Loading... Please wait!</div>
   </div>
 
-
   <main>
     <section class="free-stock-photos" id="photosSection">
       <div id="imageGallery" class="photos"></div>
     </section>
-    <section class="video-section" id="videoSection" style="display:none;">
-      <div id="videoGallery" class="videos"></div>
+
+    <!-- Contact Section -->
+    <section id="contactSection" style="display:none; padding: 20px;">
+      <h2>Contact Us</h2>
+      <p>If you have questions or suggestions, feel free to reach out!</p>
+      <form id="contactForm" style="max-width: 500px;">
+        <label>Name:</label>
+        <input type="text" placeholder="Your name" style="width: 100%; padding: 8px; margin-bottom: 10px;" required />
+        
+        <label>Email address:</label>
+        <input type="email" placeholder="Your email" style="width: 100%; padding: 8px; margin-bottom: 10px;" required />
+        
+        <label>Message:</label>
+        <textarea placeholder="Your message" rows="5" style="width: 100%; padding: 8px; margin-bottom: 10px;" required></textarea>
+        
+        <button type="submit" style="padding: 10px 20px;">Send Message</button>
+      </form>
     </section>
   </main>
 
   <script src="script.js"></script>
   <script>
-    // Navigation for Videos and Home tab
+    let currentTab = 'Home';
+
+    // Navigation logic
     document.querySelectorAll('nav ul li').forEach(li => {
-      li.addEventListener('click', function() {
+      li.addEventListener('click', function () {
         const text = this.textContent.trim();
+        currentTab = text;
+
+        // Hide all sections first
+        document.getElementById('photosSection').style.display = 'none';
+        document.getElementById('contactSection').style.display = 'none';
+
         if (text === 'Videos') {
-          document.getElementById('photosSection').style.display = 'none';
-          document.getElementById('videoSection').style.display = '';
-          showLoading();
-          fetchVideos().finally(hideLoading);
+          window.location.href = 'videos.html';
         } else if (text === 'Home') {
           document.getElementById('photosSection').style.display = '';
-          document.getElementById('videoSection').style.display = 'none';
           showLoading();
           fetchPopularImages().finally(hideLoading);
-        } else {
-          document.getElementById('photosSection').style.display = '';
-          document.getElementById('videoSection').style.display = 'none';
+        } else if (text === 'Contact') {
+          document.getElementById('contactSection').style.display = '';
         }
       });
+    });
+
+    // Search button logic
+    document.getElementById('searchBtn').addEventListener('click', function () {
+      const query = document.getElementById('searchInput').value.trim();
+      if (!query) return;
+
+      showLoading();
+      if (currentTab === 'Videos') {
+        // This will not run in index.html since Videos link goes to videos.html
+        searchVideos(query).finally(hideLoading);
+      } else {
+        searchImages(query).finally(hideLoading);
+      }
+    });
+
+    // Contact form submission handler
+    document.getElementById("contactForm").addEventListener("submit", function (e) {
+      e.preventDefault();
+      alert("Thank you for reaching out! We'll get back to you soon.");
+      this.reset();
     });
   </script>
 </body>
