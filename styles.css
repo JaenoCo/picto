@@ -8,7 +8,7 @@
 .chibi-body {
   position: relative;
   width: 70px;
-  height: 90px;
+  height: 120px;
   background: #ffe0f0;
   border-radius: 40px 40px 50px 50px / 40px 40px 60px 60px;
   box-shadow: 0 4px 12px #e0b0c7;
@@ -16,7 +16,7 @@
   animation: chibi-bounce 1s infinite ease-in-out;
 }
 .chibi-face {
-  position: absolute;
+  position: fixed;
   top: 18px;
   left: 50%;
   width: 36px;
@@ -28,7 +28,7 @@
   box-shadow: 0 2px 6px #e0b0c7;
 }
 .chibi-ear {
-  position: absolute;
+  position: fixed;
   top: 6px;
   width: 18px;
   height: 18px;
@@ -213,20 +213,20 @@ nav ul li:hover {
   background-color: #27ae60;
 }
 
-/* Gallery Section */
+
 .free-stock-photos {
-  padding: 2rem;
+  padding: 1rem;
 }
 
-/* Masonry/Pinterest-style gallery */
+
 .photos {
-  column-count: 3;
-  column-gap: 1.5rem;
+  column-count: 4;
+  column-gap: 1rem;
 }
 
 .photos img {
   width: 100%;
-  margin-bottom: 1.5rem;
+  margin-bottom: .5px;
   border-radius: 12px;
   box-shadow: 0 2px 8px rgba(0,0,0,0.1);
   transition: transform 0.3s, box-shadow 0.3s;
@@ -240,7 +240,7 @@ nav ul li:hover {
 }
 
 /* Responsive Design */
-@media (max-width: 900px) {
+@media (max-width: 500px) {
   .photos {
     column-count: 2;
   }
@@ -280,7 +280,40 @@ nav ul li:hover {
   }
 
   .search-bar button {
-    margin-top: 0.5rem;
+    
     width: 100%;
   }
+
+.image-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  break-inside: avoid;
+  background-color: #fff;
+  padding: 1rem;
+  border-radius: 16px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+.image-card img {
+  width: 100%;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s, box-shadow 0.3s;
+  cursor: pointer;
+}
+
+.image-card img:hover {
+  transform: scale(1.03);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+}
+
+.caption {
+  font-weight: bold;
+  font-size: 8px;
+  text-align: center;
+  color: #333;
+  margin-bottom: 30px;
+}
+
 }

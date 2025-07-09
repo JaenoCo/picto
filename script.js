@@ -132,10 +132,20 @@ function displayImages(photos) {
   }
 
   photos.forEach(photo => {
+    const wrapper = document.createElement('div');
+    wrapper.classList.add('image-card');
+
     const img = document.createElement('img');
     img.src = photo.src.medium;
     img.alt = photo.alt;
     img.title = `Photo by ${photo.photographer}`;
-    gallery.appendChild(img);
+
+    const caption = document.createElement('p');
+    caption.className = 'caption';
+    caption.textContent = photo.alt ? photo.alt.split(/\s+/).slice(0, 5).join(' ') : 'Untitled Photo';
+
+    wrapper.appendChild(img);
+    wrapper.appendChild(caption);
+    gallery.appendChild(wrapper);
   });
 }
