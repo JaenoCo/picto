@@ -125,37 +125,27 @@ function hideLoading() {
 }
 
 function displayImages(photos) {
-  gallery.innerHTML = ''; 
+  gallery.innerHTML = ''; // Clear previous images
   if (photos.length === 0) {
     gallery.innerHTML = `<p>No images found. Try a different keyword!</p>`;
     return;
   }
 
-  photos.forEach((photo, index) => {
+  photos.forEach(photo => {
     const wrapper = document.createElement('div');
-    wrapper.classList.add('image-card-container');
-
-    const card = document.createElement('div');
-    card.classList.add('image-card');
+    wrapper.classList.add('image-card');
 
     const img = document.createElement('img');
     img.src = photo.src.medium;
     img.alt = photo.alt;
     img.title = `Photo by ${photo.photographer}`;
 
-    
-    const title = document.createElement('h3');
-    title.className = 'photo-title';
-    title.textContent = `Photo #${index + 1}`;
+    const caption = document.createElement('p');
+    caption.className = 'caption';
+    caption.textContent = photo.alt ? photo.alt.split(/\s+/).slice(0, 5).join(' ') : 'Untitled Photo';
 
-    const description = document.createElement('p');
-    description.className = 'description';
-    description.textContent = 'A beautiful stock photo from Pexels.';
-
-    card.appendChild(img);
-    card.appendChild(title);
-    card.appendChild(description);
-    wrapper.appendChild(card);
+    wrapper.appendChild(img);
+    wrapper.appendChild(caption);
     gallery.appendChild(wrapper);
   });
 }
